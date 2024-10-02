@@ -2,8 +2,13 @@ const path = require('path');
 
 module.exports = {
 entry: './src/indexSrc.ts',
+mode: 'production',
 module: {
     rules: [
+    {
+        test: /\.css$/i,
+        use: ["css-loader"],
+    },
     {
         test: /\.tsx?$/,
         use: 'ts-loader',

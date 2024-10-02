@@ -1,0 +1,43 @@
+div {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e3e3e3;
+    border-bottom: solid 1px #3e3e3e;
+}
+
+#number-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#number {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 40px;
+}
+
+#number::placeholder {
+    color: #3e3e3e;
+}
+
+button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 40px;
+    background-color: #3e3e3e;
+    color: #e3e3e3;
+    cursor: pointer;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5rem;
+    list-style: none;
+}

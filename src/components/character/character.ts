@@ -1,24 +1,66 @@
+import styles from './character.css';
+
+export enum Attribute {
+    "image" = "image",
+    "name" = "name",
+    "status" = "status",
+    "species" = "species",
+    "chartype" = "chartype",
+    "origin" = "origin",
+    "firstepisode" = "firstepisode"
+}
+
 class CharacterCard extends HTMLElement {
+    image?: string;
+    name?: string;
+    status?: string;
+    species?: string;
+    chartype?: string;
+    origin?: string;
+    firstepisode?: string;
+
     constructor() {
-        console.log("FLAG CONSTRUCTOR!");
         super();
         this.attachShadow({ mode: 'open' });
     }
 
+    static get observedAttributes() {
+        return Object.keys(Attribute);
+    }
+
+    attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
+        switch(propName) {
+            default:
+                this[propName] = newValue;
+                break;
+        }
+    }
+
     connectedCallback() {
-        console.log("FLAG CONNECTEDCALLBACK!");
         this.render();
     }
 
     render() {
-        console.log("FLAG RENDER!");
         if(this.shadowRoot){
             this.shadowRoot.innerHTML = `
-                <div>
-                    <h1>Hola, esto es un CharacterCard</h1>
-                </div>
+                <li>
+                    <div id="character-image" style="background-image: url('${this.image}');"></div>
+                    <h1 class="character-info">${this.name ? this.name : "No Name Registered"}</h1>
+                    <h3 class="character-info">${this.status ? this.status : "Status Unknown"}</h3>
+                    <h3 class="character-info">${this.species ? this.species : "Specie Unknown"}</h3>
+                    <h3 class="character-info">${this.chartype ? this.chartype : "Regular " + this.species}</h3>
+                    <h3 class="character-info">${this.origin ? this.origin : "Origin Unknown"}</h3>
+                    <h2>First Episode:</h2>
+                    <h3 class="character-info"></h3>${this.firstepisode ? this.firstepisode : "No Episode Registered"}</h3>
+                </li>
             `;
+
+            console.log(this.chartype);
         }
+
+        const cssCharacter = document.createElement('style');
+        cssCharacter.innerHTML = styles;
+        this.shadowRoot?.appendChild(cssCharacter);
     }
 }
 
